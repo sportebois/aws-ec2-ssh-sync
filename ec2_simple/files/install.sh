@@ -15,7 +15,6 @@ sudo sed -i 's:#AuthorizedKeysCommand none:AuthorizedKeysCommand /opt/authorized
 sudo sed -i 's:#AuthorizedKeysCommandUser nobody:AuthorizedKeysCommandUser nobody:g' /etc/ssh/sshd_config
 
 # Refresh users frequently
-# sudo echo "*/10 * * * * root /opt/import_users.sh" > /etc/cron.d/import_users
 sudo cp import_users.cron /etc/cron.d/import_users
 sudo chmod 0644 /etc/cron.d/import_users
 

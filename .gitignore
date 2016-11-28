@@ -1,3 +1,5 @@
 secret.tfvars
 .idea/
 *.iml
+terraform.tfstate*
+*.tfplan
