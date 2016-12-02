@@ -1,25 +1,21 @@
 # --- Some instance to run our services onto
 
 resource "aws_instance" "ssh_test_demo" {
-  # ami = "ami-4d795c5a" # CoreOS HVM stable AMI for us-esat-1, then ssh connectin is done with core@ip...
 
+  # Check http://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_container_instance.html for the AMI ids for each region
+  # or check other sample for using an HCL map to only set the region
   ami = "ami-55870742" # ECS-optimized AMI for us-east-1
   availability_zone = "us-east-1b"
-  # Check http://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_container_instance.html for the ami ids for each region
-  # If we really want to handle multiple regions, this should come from a Map
+
   instance_type = "t2.micro"
 
   iam_instance_profile = "${aws_iam_instance_profile.ssh_test_demo.name}"
 
   security_groups = ["${aws_security_group.ssh_test_demo.name}"]
 
-  # Default key for ec2 user ssh access
   key_name = "${var.private_key_name}"
 
-
-  # TODO fetch the scripts from the internet so that we don't need remote-exec, hence we don't need the initial ssh connection
   # Connection used by the provisionners below to access the instance
-
   connection {
     user = "ec2-user"
     private_key = "${file(var.private_key_path)}"

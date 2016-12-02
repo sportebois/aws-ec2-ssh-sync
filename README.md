@@ -2,6 +2,9 @@
 
 Notes: lot of duplication acorss the samples, because we want each sample to be self-sufficient (you can take the one you like and throw out the others)
 
+Goal: usually - 1 keypair defined for each EC2 region and associated to your instance that you can use with a ec2-user (or other used for different AMIs)
+With this setup: no longer mandatory to have region-defined key (but you could), and automatic sync of users from IAM, each one with their own ssh-keys.
+
 
 ## What's in there
 
@@ -9,6 +12,7 @@ Notes: lot of duplication acorss the samples, because we want each sample to be 
 ## Note about IAM Roles and Profiles
 
 Detail about the EC2 IAM restriction: Roles in an instance profile: 1 (each instance profile can contain only 1 role)
+
 
 
 ## Config
@@ -57,7 +61,6 @@ This repo is only about using the same technique with Terraform, because we'd pr
 ## TODO / next steps
 
 [ ] Basic arch diagram to make this easier to get at first glance
-[ ] get AMIs IDs/availability zones from a map to let you change your region more easily
 [ ] do a clean variation using CoreOS
 [ ] do a bastion variation ? 
  

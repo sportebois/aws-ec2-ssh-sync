@@ -1,0 +1,47 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AllowGetAWSUserNames",
+      "Effect": "Allow",
+      "Action": [
+        "iam:ListUsers"
+      ],
+      "Resource": [
+        "*"
+      ]
+    },
+    {
+      "Sid": "AllowFetchAWSUserSSHKeys",
+      "Effect": "Allow",
+      "Action": [
+        "iam:ListSSHPublicKeys",
+        "iam:GetSSHPublicKey"
+      ],
+      "Resource": "arn:aws:iam::${aws_account}:user/*"
+    },
+    {
+      "Sid": "PolicyForECSInstances",
+      "Effect": "Allow",
+      "Action": [
+        "ecs:CreateCluster",
+        "ecs:DeregisterContainerInstance",
+        "ecs:DiscoverPollEndpoint",
+        "ecs:Poll",
+        "ecs:RegisterContainerInstance",
+        "ecs:StartTelemetrySession",
+        "ecs:Submit*",
+        "ecr:GetAuthorizationToken",
+        "ecr:BatchCheckLayerAvailability",
+        "ecr:GetDownloadUrlForLayer",
+        "ecr:BatchGetImage",
+        "ecs:StartTask",
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:DescribeLogStreams",
+        "logs:PutLogEvents"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

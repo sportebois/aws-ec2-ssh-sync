@@ -1,15 +1,17 @@
+# Do not change the values here, but rather place them in secret.tfvars (gitignored) or in another tfvars file to pass to Terraform
+
 variable "aws_access_key" {
-  description = "A valid AWS ACCESS KEY. Do not place it here, but rather in a secrets.tfvars file."
+  description = "A valid AWS ACCESS KEY"
   type = "string"
 }
 
 variable "aws_secret_key" {
-  description = "A valid AWS SECRET KEY. Do not place it here, but rather in a secrets.tfvars file."
+  description = "A valid AWS SECRET KEY"
   type = "string"
 }
 
 variable "aws_account" {
-  description = "Your AWS Account number. Do not place it here, but rather in a secrets.tfvars file."
+  description = "Your AWS Account number"
   type = "string"
 }
 
@@ -19,18 +21,13 @@ variable "aws_region" {
 }
 
 variable "private_key_name" {
-  description = "Name of the EC2 private key to use to provision the instances."
+  description = "Name of the EC2 private key to use to provision the instances in that region."
   type = "string"
 }
 
 variable "private_key_path" {
-  description = "Path to the private key registred in EC2 with the name put in private_key_name"
+  description = "Path to the private key registred to EC2 keypair with the name put in private_key_name"
   type = "string"
-}
-
-variable "stack_name" {
-  type = "string"
-  default = "ssh_test_demo"
 }
 
 variable "admin_public_ips" {

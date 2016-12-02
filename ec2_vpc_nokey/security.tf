@@ -20,19 +20,29 @@ resource "aws_internet_gateway" "ssh_test_demo" {
 
 # Public subnets
 
-resource "aws_subnet" "subnet1" {
+resource "aws_subnet" "subnet1-public" {
   vpc_id = "${aws_vpc.ssh_test_demo.id}"
 
   cidr_block = "10.0.0.0/24"
-  availability_zone = "us-east-1b"
+  availability_zone = "${lookup(var.aws_availability_zone, var.aws_region)}"
 
   tags {
     Name = "ssh_test_demo"
   }
 }
 
+//resource "aws_subnet" "subnet2-public" {
+//  vpc_id = "${aws_vpc.ssh_test_demo.id}"
+//
+//  cidr_block = "10.0.2.0/24"
+//  availability_zone = "us-east-1a"
+//
+//  tags {
+//    Name = "ssh_test_demo"
+//  }
+//}
 
-resource "aws_route_table" "route1" {
+resource "aws_route_table" "az1-public" {
   vpc_id = "${aws_vpc.ssh_test_demo.id}"
 
   route {
@@ -46,13 +56,17 @@ resource "aws_route_table" "route1" {
 }
 
 
-resource "aws_route_table_association" "us-east-1b-public" {
-  subnet_id = "${aws_subnet.subnet1.id}"
-  route_table_id = "${aws_route_table.route1.id}"
+resource "aws_route_table_association" "subnet1-public" {
+  subnet_id = "${aws_subnet.subnet1-public.id}"
+  route_table_id = "${aws_route_table.az1-public.id}"
 }
 
+//resource "aws_route_table_association" "subnet2-public" {
+//  subnet_id = "${aws_subnet.subnet2-public.id}"
+//  route_table_id = "${aws_route_table.az1-public.id}"
+//}
 
-// ElasticIP isn't required, you can leave this commented or enable it. It's useful when you have multiple AZ.
+// ElasticIP isn't required, because we're only using a single AZ here. You can leave this commented or enable it
 //resource "aws_eip" "ip" {
 //  instance = "${aws_instance.ssh_test_demo.id}"
 //  vpc = true

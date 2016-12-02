@@ -1,5 +1,5 @@
 
-# Caveat: AWS instance profiles only allows 1 role/1 profile
+# Caveat: AWS instance profiles oonly allows 1 role/1 profile
 # "Roles in an instance profile: 1 (each instance profile can contain only 1 role)"
 # Learn more: http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-limits.html
 
