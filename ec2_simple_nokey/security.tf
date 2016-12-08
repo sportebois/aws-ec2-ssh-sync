@@ -5,7 +5,7 @@ resource "aws_security_group" "ssh_test_demo" {
   name = "ssh_test_demo"
   description = "Allow all inbound traffic"
 
-  // Note: For ecs usage, Https outboud traffic to ssm.us-east-1.amazonaws.com and https://ecs.us-east-1.amazonaws.com must be allowed
+  // Note: For ecs usage, Https outbound traffic to ssm.us-east-1.amazonaws.com and https://ecs.us-east-1.amazonaws.com must be allowed
 
   # SSH config
   ingress {

@@ -96,6 +96,15 @@ If you change it to use ElasticIP, you might need to call it several times, beca
 
 ## Where to go from here
 
+
+These samples should help getting you started. Then you'd probably want to look into these to make your solution more robust abd better meet your specific needs.
+
+### Simpler storage of ssh sync scripts
+
+To keep these samples simple, everything is in there. In the real world, you'd probably want to keep your Terraform projects in your private source control system, and to make the ssh sync scripts used easy to fetch securely form the instance (ie maybe not from the VCS). 
+An easy solution, for simple project, is a dedicated public repo, as long as there's no specific information about your infrastructure, it could be fine and it's very easy. You can browse for inspiration in the [aws-ec2-ssh-sync-samples](https://github.com/sportebois/aws-ec2-ssh-sync-samples) repo.
+Other use cases could leverage S3, since the secure access would be resolved by the IAM role associated with the instance profile of your instance, and therefore no specific credentials would need to be added.
+
 ### Smaller list of users
 
 To only sync a subset of users, you can update `aws iam list-users ...` in  the `import_users.sh` script to fetch only the users who should access this instance. 
@@ -107,27 +116,31 @@ This is a starting point, you now have some foundation set on which to build the
 
 ### Better networking
 
-Better Bastion/Nat + public/private subnets
-Multiple AZ
+In order to reduce the scope of these sample, networking was limited to the bare minimum.
+From the ssh point of view, implementing a bastion in the public subnet of the VPC, which would then let your access the private subnet where your other hosts live would be something you'd like to look into.
 
 
 ### Other improvements
 
-Add CloudTrail login for IAM activity
-
-Investigate KMS-based solution to store and fetch keys
+- Add CloudTrail logging for IAM activity
+- Investigate KMS-based solution to store and fetch keys
 
 
 ## Credits
 
-All the hard work has been done by Michael Wittig, and his presentation of the 'hack' to use CodeCommit's ssh keys or EC2 instances is brilliant. Go read [Manage AWS EC2 SSH access with IAM](https://cloudonaut.io/manage-aws-ec2-ssh-access-with-iam/) to learn more.
-This repo is only about using the same technique with Terraform, because we'd prefer to use Terraform than CloudFormation.
+All the hard work has been done by Michael Wittig, and his presentation of the 'hack' to use CodeCommit's ssh keys or EC2 instances is brilliant. 
+Go read [Manage AWS EC2 SSH access with IAM](https://cloudonaut.io/manage-aws-ec2-ssh-access-with-iam/) to learn more.
+This repo started as doing a port using the same technique with Terraform, because we'd prefer to use Terraform than CloudFormation. Then some variations were added to illustrate different techniques. 
+
+
+## Want to learn more?
+
+If you're new to Terraform but want to learn more, [The Terraform Book](https://terraformbook.com) offers a free preview, and is a great intro to this thing. You'll get the basics to then read the official documentation (which is great, but maybe not as much newcomer-friendly) 
 
 
 ## TODO / next steps
 
-[ ] Basic arch diagram to make this easier to get at first glance
-[ ] do a clean variation using CoreOS
-[ ] do a bastion/nat/multipleAZ variation ? 
+- Basic arch diagram to make this easier to get at first glance
+- do a clean variation using CoreOS
+- do bastion/nat/multipleAZ variations? 
  
-

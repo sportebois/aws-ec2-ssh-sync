@@ -17,3 +17,7 @@ git pull --depth=1 origin master
 cd ec2_simple_nokey/files
 chmod +x *.sh
 sudo ./install.sh
+
+# In some real ECS use, you'd might want to add the following lines and use a Terraform template_file (or directly the value)
+# Make sure the instance has the correct cluster registered
+# echo ECS_CLUSTER=${ecs_cluster_name} >> /etc/ecs/ecs.config
