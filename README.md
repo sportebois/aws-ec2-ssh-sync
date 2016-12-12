@@ -82,6 +82,7 @@ Terraform is going to create all the resources... If your secrets are corrcet an
 The public IP/DNS of your instance is shown in Terraform outputs. In the following snippet, `awsUsername` contains the name of your AWS IAM user (if you need to specify the ssh key, use `-i path/to/your/key` like for any ssh connection)
 
     ec2PublicIp=$(terraform output | grep 'ec2_instance_public_ip' | sed 's@.*= @@g')
+    awsUsername=$(aws iam get-user  | jq -r .User.UserName)
     ssh ${awsUsername}@${ec2PublicIp}
 
 
