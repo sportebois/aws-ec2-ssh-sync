@@ -1,7 +1,12 @@
 #!/bin/bash
 
 # Install Git
-sudo yum install -y git
+source /etc/os-release
+if [ "$NAME" == "Ubuntu" ]; then
+  sudo apt-get -y install git
+elif [ "$NAME" == "Amazon Linux AMI" ]; then
+  sudo yum install -y git
+fi
 
 # Fetch setup files from Github over HTTPS. You can choose any other secure way to fetch your setup files
 cd /tmp
