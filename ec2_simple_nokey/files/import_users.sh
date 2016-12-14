@@ -6,7 +6,7 @@ aws iam list-users --query "Users[].[UserName]" --output text | while read User;
   else
     source /etc/os-release
     if [ "$NAME" == "Ubuntu" ]; then
-      /usr/sbin/useradd -m "$User"
+      /usr/sbin/useradd -m "$User" -s /bin/bash
     elif [ "$NAME" == "Amazon Linux AMI" ]; then
       /usr/sbin/adduser "$User"
     fi
