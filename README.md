@@ -39,6 +39,25 @@ Finally, `ec2_vpc_nokey` uses maps to set the AMI and the availibity zone, depen
 If you're new into Terraform and HCL, the same progression applies: it will be easier to get started with the simplest version (`ec2_simple`, to later only focus on the changes and additon... rather than trying to get everything at once)
 
 
+### What's the goal of this setup?
+
+These are slightly different ways to setup your instance, but they all achieve the same setup to later let a user ssh the instance.
+The process is twofolds:
+
+- at regular interval, the instance will update the local sudoers, getting a list of users (without any key) and create them on the host if they're new
+
+![Regular refresh of the users](docs/aws-entities-1.png)
+
+- whenever a user ssh the instance, the key will be looked for in his IAM CodeCommit config.
+
+![Regular refresh of the users](docs/aws-entities-2.png)
+
+
+Which can be viewed as:
+
+![Sequence diagram](docs/sequence.png)
+
+
 ## Quick note about IAM Roles and Profiles
 
 One of the constraints shown here is that an EC2 instance can have 1 profile, with a single role. So you can't have a few roles and bundle them in that profile, you have ot put everything together there. (But that role can be used by many instances)
